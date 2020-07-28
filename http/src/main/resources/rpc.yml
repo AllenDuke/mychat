@@ -2,7 +2,7 @@ server:
   name: http-com.github.AllenDuke.service-server #提供service服务
   host: 127.0.0.1
   port: 9002
-  packageName: com.github.AllenDuke.http.com.github.AllenDuke.service.impl
+  packageName: com.github.AllenDuke.service.impl
   businessPoolModel: 0 #RPC不启用线程池
   allIdleTime: 10000
   enableSpring: 1 #当前如果是spring环境，建议开启

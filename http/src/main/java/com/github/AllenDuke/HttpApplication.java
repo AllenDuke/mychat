@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.github.AllenDuke.http.dao")
+@MapperScan(basePackages = "com.github.AllenDuke.dao")
 public class HttpApplication {
 
     public static void main(String[] args) throws Exception {

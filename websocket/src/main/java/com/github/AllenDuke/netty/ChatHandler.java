@@ -29,7 +29,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println(ctx.channel().remoteAddress()+" 正在连接...");
+        System.out.println(ctx.channel().remoteAddress() + " 正在连接...");
         super.channelActive(ctx);
     }
 
@@ -126,19 +126,16 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
             System.out.println("用户：" + friendId + " 离线");
             FriendRequestMessageService requestMessageService =
                     (FriendRequestMessageService) RPCClient.getServiceImpl(FriendRequestMessageService.class);
-            requestMessageService.save(friendRequestMessage);
             FriendRequestMessage requestMessage =
                     requestMessageService.getFriendRequestMessage(friendRequestMessage.getUserId(), friendId);
             if (requestMessage != null) {
                 System.out.println("数据库已经存在，对方尚未处理");
                 return;
             }
-            try {
-                System.out.println("尝试新增好友请求信息");
-                requestMessageService.save(friendRequestMessage);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
+            /**
+             * todo 只有把save置于getFriendRequestMessage前面，save才会执行，否则似乎没有了下面的代码一样，不执行，没有异常，断点也进不去
+             */
+            requestMessageService.save(friendRequestMessage);
             System.out.println("新增好友请求信息：" + friendRequestMessage);
         } else channel.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(message)));
     }
@@ -152,7 +149,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println(ctx.channel().remoteAddress()+" 已断开连接！");
+        System.out.println(ctx.channel().remoteAddress() + " 已断开连接！");
         Integer removeUserId = channelUserIdMap.remove(ctx.channel());
         //用户下线，更新群在线人数
 //        handlerUserLogout(removeUserId);

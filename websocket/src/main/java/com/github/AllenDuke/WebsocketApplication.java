@@ -12,7 +12,7 @@ import com.github.AllenDuke.netty.WebSocketServer;
 public class WebsocketApplication {
 
     public static void main(String[] args) throws Exception {
-        RPCClient.init();
+        RPCClient.init();//消费离线消息存储等服务
         new WebSocketServer().start();//提供在线消息服务
     }
 }

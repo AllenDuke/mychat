@@ -37,9 +37,11 @@ public class UserController {
             User user = userService.login(userAO.getChatNum(), userAO.getPassword(),key);
             if(user == null) return Result.fail(ErrorCode.INVALID_PARAMETER,"账号或密码错误");
             //登陆时，往redis存入用户所在的服务器，在聊天时可用（两人可能不在同一个服务器）
+            //todo 负载均衡 给出一个websocket服务器地址
             String randStr= RandomStr.getRandomStr(10);
             String redisValue=  randStr+"本机地址"+":"+"本机端口"+"-"+user.getId();
             JedisUtil.setObject(key, redisValue,10);
+
             UserVO userVO = new UserVO();
             userVO.setUser(user);
             userVO.setRandStr(randStr);

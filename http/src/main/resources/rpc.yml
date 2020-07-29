@@ -4,7 +4,7 @@ server:
   port: 9002
   packageName: com.github.AllenDuke.service.impl
   businessPoolModel: 0 #RPC不启用线程池
-  allIdleTime: 10000
+  allIdleTime: 30000 #30s
   enableSpring: 1 #当前如果是spring环境，建议开启
 zookeeper:
   host: 49.235.168.215

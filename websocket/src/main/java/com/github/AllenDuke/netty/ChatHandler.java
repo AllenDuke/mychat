@@ -107,6 +107,8 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
         }
     }
 
+
+    //todo 将当前用户所处的websocket服务器地址记录在redis
     @Override
     public void handleConnectedMsg(Channel channel, Message message) {
         ConnectedMessage connectedMessage = message.getConnectedMessage();
@@ -142,7 +144,7 @@ public class ChatHandler extends SimpleChannelInboundHandler<TextWebSocketFrame>
 
     /**
      * @param ctx
-     * @description: 当连接断开时，移除该客户及其channel
+     * @description: 当连接断开时，移除该客户及其channel todo 移除redis相关信息
      * @return: void
      * @author: 杜科
      * @date: 2020/4/20

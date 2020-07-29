@@ -9,5 +9,5 @@ zookeeper:
   host: 49.235.168.215
   port: 2181
   seesionTimeOut: 2000
-  provideServiceNames:
-    ChatHandler:
+#  provideServiceNames:
+#    ChatHandler:
